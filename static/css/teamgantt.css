@@ -1,0 +1,83 @@
+.accordion {
+    --bs-accordion-btn-padding-x: 0;
+    --bs-accordion-btn-padding-y: 0.5rem;
+    --bs-accordion-body-padding-x: 1rem;
+    --bs-accordion-body-padding-y: 0;
+}
+.accordion-item.group {
+    margin-bottom: 0.75rem!important;
+}
+.accordion-item {
+    border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color)!important;
+    border-top-left-radius: var(--bs-accordion-border-radius)!important;
+    border-top-right-radius: var(--bs-accordion-border-radius)!important;
+}
+.group-header {
+    color: var(--bs-accordion-active-color);
+}
+.accordion-body {
+    padding-right: 0;
+}
+.subgroup > .accordion-button {
+    padding: 0;
+}
+.comment-body > p, .document {
+    font-size: 0.85rem;
+}
+.comment-body > p {
+    margin-bottom: 0.2rem;
+}
+.comment-body > p ~ p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.groups.hide-completed .item-complete {
+    display: none!important;
+}
+.groups.hide-not-for-user .task-not-for-user {
+    display: none!important;
+}
+.groups.hide-old .task:not(.new-item) {
+    display: none!important;
+}
+.group-header.collapsed ~ .group-body {
+    display: None;
+}
+.controls.sticky-top {
+    background-color: var(--bs-body-bg);
+}
+.input-percent {
+    width: 2rem;
+    border: 0;
+    background: inherit;
+}
+.comment-count {
+    position: absolute;
+    display: inline;
+    font-size: 0.75em;
+    right: -0.25em;
+    top: -0.25em;
+}
+.new-item .wbs:first-of-type {
+    color: green!important;
+    font-weight: bold;
+}
+.hide {
+    display: none;
+}
+.no-visible-children {
+    display: none;
+}
+.hide-comments {
+    display: None;
+}
+.fs-7, .fs-7 > p {
+    font-size: 0.85rem;
+}
+.fs-7 > small {
+    font-size: 0.7rem;
+}
+.fs-7 > button {
+    padding-top: 0;
+    padding-bottom: 0;
+}
