@@ -44,7 +44,7 @@ projects_map = {
 }
 ```
 1. Login to teamgantt
-1. You should be in **https://app.teamgantt.com/my-projects/** if not, click the top right teamgantt icon
+1. You should be in **https://app.teamgantt.com/my-projects/** if not, click the top left teamgantt icon
 1. To add projects to `projects_map`:
 	1. Right-click a project you want to include
 	1. Click **Copy link address** and paste it in notepad or any text editor, it will look like https://app.teamgantt.com/projects?ids=*1234567*
