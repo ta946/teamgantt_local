@@ -47,19 +47,15 @@ function create_project(project_id) {
 function create_header(name_) {
   let html = `
     <div class="header d-flex gap-3">
-      <div id="back" class="btn btn-secondary d-flex align-items-center">
+      <a id="back" class="btn btn-secondary d-flex align-items-center" href="?">
         <i class="fa fa-chevron-left"></i>
-      </div>
+      </a>
       <h1 class="project-name">
         ${name_}
       </h1>
     </div>
   `;
   var div = parse_html(html);
-
-  div.find('#back').on('click', function () {
-    render_projects_page();
-  });
   return div;
 }
 

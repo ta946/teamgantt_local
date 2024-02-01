@@ -7,7 +7,12 @@ function main() {
 
   init_localstorage();
 
-  render_projects_page();
+  let project_id = check_url_for_project();
+  if (!!project_id) {
+    render_project_page(project_id);
+  } else {
+    render_projects_page();
+  }
   // render_project_page(Object.keys(DATA['projects_map'])[0]);
 
   // fetch_token();
@@ -17,6 +22,11 @@ function main() {
   //   'type': 'info',
   //   'duration' : 4000
   // });
+}
+
+function check_url_for_project() {
+  let project_id = new URLSearchParams(location.search).get('project_id');
+  return project_id;
 }
 
 function confirm_exit() {

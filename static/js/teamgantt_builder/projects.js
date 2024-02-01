@@ -29,18 +29,14 @@ function create_project_container() {
 
 function create_project_li(project_id, name_) {
   let html = `
-    <div id="${project_id}" class="project btn btn-secondary" data-id="${project_id}">
+    <a id="${project_id}" class="project btn btn-secondary" data-id="${project_id}" href="?project_id=${project_id}">
       <div class="project-content col">
         <div class="project-name">
           ${name_}
         </div>
       </div>
-    </div>
+    </a>
   `;
   let div = parse_html(html);
-  div.on('click', function () {
-    let project_id = $(this).attr('data-id');
-    render_project_page(project_id);
-  });
   return div;
 }
