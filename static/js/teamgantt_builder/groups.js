@@ -167,13 +167,19 @@ function create_accordion(
         .children('.comments');
       $comments.toggleClass('hide-comments');
     });
+  let $accordion_body_scrollto_header = accordion.children('.group-body');
+  $accordion_body_scrollto_header.on('click', function (evt) {
+    evt.stopPropagation();
+    let $accordion_item = $(this).closest('.accordion-item');
+    scrollto_header($accordion_item, evt);
+  });
   let $collapse_current = accordion
     .children('.group-header')
     .children('.collapse-current');
   $collapse_current.on('click', function (evt) {
     evt.stopPropagation();
     let $accordion_item = $(this).closest('.accordion-item');
-    toggle_collapse_level($accordion_item, true);
+    toggle_collapse_children($accordion_item, true);
   });
   let $expand_current = accordion
     .children('.group-header')
@@ -182,7 +188,7 @@ function create_accordion(
     evt.stopPropagation();
     let $accordion_item = $(this).closest('.accordion-item');
     $accordion_item.children('.group-header').removeClass('collapsed');
-    toggle_collapse_level($accordion_item, false);
+    toggle_collapse_children($accordion_item, false);
   });
   return accordion;
 }
@@ -216,7 +222,7 @@ function apply_completion_classes(id, percent) {
   }
 }
 
-function toggle_collapse_level(el, hide) {
+function toggle_collapse_children(el, hide) {
   toggle = !!hide ? 'hide' : 'show';
   el_children = el.children('.group-body').find('.group-header');
   if (!!hide) {
@@ -224,6 +230,16 @@ function toggle_collapse_level(el, hide) {
   } else {
     el_children.removeClass('collapsed');
   }
+}
+
+function scrollto_header(el, evt) {
+  if (evt.target !== evt.currentTarget) return;
+  $accordion = el.closest('.accordion-item');
+  y = $accordion.offset().top - $('.controls').height();
+  $window = $(window);
+  curr_y = $window.scrollTop();
+  if (y >= curr_y) return;
+  $window.scrollTop(y);
 }
 
 function storage_collapsed_add(id) {
