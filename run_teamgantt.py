@@ -266,8 +266,10 @@ class TeamGantt:
             'items': {},
         }
         for item in project_children:
-            item_id = item['id']
             item_type = item['type']
+            if item_type == 'milestone':
+                continue
+            item_id = item['id']
             has_comments = bool(item['comment_info']['count'])
             item['comments'] = {}
             project['items'][item_id] = item
@@ -299,7 +301,7 @@ class TeamGantt:
         if project_prev:
             new_items = list(set(project['items']) - set(project_prev['items']))
             if not len(new_items):
-                new_items = project_prev['items']['new_items']
+                new_items = project_prev['new_items']
             project['new_items'] = new_items
 
             project['comments'] = project_prev['comments'].copy()
@@ -357,6 +359,10 @@ class TeamGantt:
 
 
 def main(projects_map=None):
+    projects_map = {
+        3522589: 'Dead-time Removal & Rally Detection',
+        3524903: 'MPM - Improvement after Beta',
+    }
     teamgantt = TeamGantt()
     teamgantt.run(projects_map=projects_map)
     os.startfile('teamgantt.html')

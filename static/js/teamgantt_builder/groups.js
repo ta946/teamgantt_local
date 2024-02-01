@@ -78,6 +78,8 @@ function create_children(project_data, item_data, is_new_item_child) {
       case 'task':
         res = create_task(project_data, item_id, is_new_item_child);
         break;
+      case 'milestone':
+        continue;
     }
     [item, percent] = res;
     items.push(item);
