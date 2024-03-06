@@ -159,5 +159,6 @@ function update_task(task_id, percent) {
   apply_completion_classes(task_id, percent);
   text = `task ${task_id} updated!`;
   console.log(text);
+  update_percentages(task_id);
   flash(text, { type: 'success' });
 }

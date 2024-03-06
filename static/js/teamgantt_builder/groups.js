@@ -131,8 +131,9 @@ function create_accordion(
           <i class="fa-solid fa-expand"></i>
         </button>
         <div class="${type}-percent px-1">
-          ${percent} <i class="fa-regular fa-percent fa-sm text-body-tertiary"></i>
+          ${percent}
         </div>
+        <i class="fa-regular fa-percent fa-sm text-body-tertiary"></i>
       </div>
 
       <div id="collapse_${id}" class="${type}-body group-body accordion-body">
@@ -257,4 +258,53 @@ function storage_collapsed_remove(id) {
   if (index === -1) return;
   data['favourties']['collapsed'].splice(index, 1);
   localstorage_save(data);
+}
+
+function update_percentages(task_id) {
+  let items = DATA['projects'][project_id]['items'];
+  let prev_id = task_id;
+
+  while (true) {
+    let prev_percent = items[prev_id]['percent_complete'];
+    let parent_group_id = items[prev_id]['parent_group_id'];
+    if (!parent_group_id) {
+      return;
+    }
+    let children = items[parent_group_id]['children'];
+    let percents = [];
+    let percent;
+    for (let child of children) {
+      let child_id = child['id'].toString();
+      if (child_id === prev_id) {
+        percents.push(prev_percent);
+      } else {
+        let item = $(`#${child_id}.task`).find('.input-percent')[0];
+        if (!item) {
+          item = $(`#${child_id}.group`).find('.group-percent')[0];
+          if (!item) {
+            item = $(`#${child_id}.subgroup`).find('.subgroup-percent')[0];
+          }
+          percent = $(item).text();
+        } else {
+          percent = item.value;
+        }
+        percent = parseInt(percent);
+        percents.push(percent);
+      }
+    }
+    let percent_total = parseInt(average(percents));
+    let percent_item = $(`#${parent_group_id}.group`).find('.group-percent')[0];
+    if (!percent_item) {
+      percent_item = $(`#${parent_group_id}.subgroup`).find(
+        '.subgroup-percent'
+      )[0];
+    }
+    $(percent_item).text(percent_total);
+    let [completed_class, _] = get_completed(percent_total);
+    $(`#${parent_group_id}`).removeClass('item-complete');
+    $(`#${parent_group_id}`).removeClass('item-incomplete');
+    $(`#${parent_group_id}`).addClass(completed_class);
+    prev_percent = percent_total;
+    prev_id = parent_group_id;
+  }
 }
