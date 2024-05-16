@@ -1,4 +1,6 @@
 __pycache__/
+.vscode/
+.venv/
 *.pyc
 data.js
 teamgantt_token.py

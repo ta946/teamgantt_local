@@ -1,2 +1,2 @@
 @echo off
-python run_teamgantt.py
+".venv/Scripts/python.exe" run_teamgantt.py
